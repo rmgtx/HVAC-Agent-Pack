@@ -1,0 +1,50 @@
+# Runtime facts. Copy values from facts.template.yaml comments.
+# Required fields empty → the agent must stop and list them.
+
+legal_name: ""
+phone: ""
+city: ""
+license: ""
+
+service_area: []
+systems_sold: []
+
+address:
+  street: ""
+  locality: ""
+  region: ""
+  postal_code: ""
+  country: "US"
+
+offers_free_estimate: false
+family_owned: false
+years_in_business: null
+
+financing:
+  apr_percent: null
+  term_months: null
+  down_payment: null
+  monthly_example: null
+  monthly_example_caveat: ""
+
+rebate:
+  cap_usd: null
+  source: ""
+
+proof:
+  review_count: null
+  review_source: ""
+  rating: null
+
+warranty:
+  parts_years: null
+  parts_source: ""
+  labor_years: null
+  labor_source: ""
+
+install_sla: ""
+brands: []
+
+programs:
+  google_guaranteed: false
+  bbb_rating: ""

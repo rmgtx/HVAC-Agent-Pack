@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hvac-replacement-copy.local/schemas/seo-page.schema.json",
+  "title": "HVAC replacement SEO page",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "page_type",
+    "title",
+    "meta",
+    "h1",
+    "h2s",
+    "faqs",
+    "schema_type",
+    "omitted_slots"
+  ],
+  "properties": {
+    "page_type": {
+      "type": "string",
+      "enum": [
+        "system_replacement",
+        "city",
+        "cost",
+        "repair_vs_replace",
+        "financing",
+        "faq_hub"
+      ]
+    },
+    "title": { "type": "string", "minLength": 1, "maxLength": 60 },
+    "meta": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "h1": { "type": "string", "minLength": 1 },
+    "h2s": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" }
+    },
+    "body_notes": { "type": "string" },
+    "faqs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["q", "a"],
+        "properties": {
+          "q": { "type": "string" },
+          "a": { "type": "string", "minLength": 40 }
+        }
+      }
+    },
+    "internal_links": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "schema_type": {
+      "type": "string",
+      "enum": [
+        "HVACBusiness",
+        "HVACBusiness+Service",
+        "FAQPage",
+        "FAQPage+Service",
+        "FAQPage+Article"
+      ]
+    },
+    "omitted_slots": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

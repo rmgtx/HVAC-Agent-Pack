@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hvac-replacement-copy.local/schemas/rsa.schema.json",
+  "title": "HVAC replacement RSA",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "system",
+    "headlines",
+    "descriptions",
+    "paths",
+    "pins",
+    "omitted_slots"
+  ],
+  "properties": {
+    "system": {
+      "type": "string",
+      "enum": [
+        "ac_replacement",
+        "furnace_replacement",
+        "heat_pump_installation"
+      ]
+    },
+    "headlines": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 15,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "chars", "pin"],
+        "properties": {
+          "text": { "type": "string", "minLength": 1, "maxLength": 30 },
+          "chars": { "type": "integer", "minimum": 1, "maximum": 30 },
+          "pin": {
+            "type": ["integer", "null"],
+            "enum": [1, 2, 3, null]
+          }
+        }
+      }
+    },
+    "descriptions": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "chars", "pin"],
+        "properties": {
+          "text": { "type": "string", "minLength": 1, "maxLength": 90 },
+          "chars": { "type": "integer", "minimum": 1, "maximum": 90 },
+          "pin": {
+            "type": ["integer", "null"],
+            "enum": [1, 2, null]
+          }
+        }
+      }
+    },
+    "paths": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": { "type": "string", "minLength": 1, "maxLength": 15 }
+    },
+    "pins": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["position_1_system_only"],
+      "properties": {
+        "position_1_system_only": { "type": "boolean", "const": true }
+      }
+    },
+    "omitted_slots": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hvac-replacement-copy.local/schemas/meta.schema.json",
+  "title": "HVAC replacement Meta ad",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "combinator",
+    "primaries",
+    "headline",
+    "description",
+    "cta",
+    "overlay",
+    "script_beats",
+    "omitted_slots"
+  ],
+  "properties": {
+    "combinator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hook_id", "offer_id", "proof_id", "cta"],
+      "properties": {
+        "hook_id": { "type": "integer", "minimum": 1, "maximum": 8 },
+        "offer_id": {
+          "type": "string",
+          "enum": [
+            "quote",
+            "free_estimate",
+            "financing",
+            "monthly",
+            "rebate",
+            "warranty_parts"
+          ]
+        },
+        "proof_id": {
+          "type": "string",
+          "enum": ["license", "reviews", "brands", "local"]
+        },
+        "cta": {
+          "type": "string",
+          "enum": ["Get Quote", "Learn More", "Book Now", "Apply Now"]
+        }
+      }
+    },
+    "primaries": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["first_sentence", "first_sentence_chars", "see_more"],
+        "properties": {
+          "first_sentence": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 125
+          },
+          "first_sentence_chars": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 125
+          },
+          "see_more": { "type": "string" }
+        }
+      }
+    },
+    "headline": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "description": { "type": "string", "maxLength": 27 },
+    "cta": {
+      "type": "string",
+      "enum": ["Get Quote", "Learn More", "Book Now", "Apply Now"]
+    },
+    "overlay": { "type": "string", "minLength": 1, "maxLength": 48 },
+    "carousel": {
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["overlay", "supporting"],
+        "properties": {
+          "overlay": { "type": "string" },
+          "supporting": { "type": "string" }
+        }
+      }
+    },
+    "script_beats": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["time", "phase", "visual", "voiceover"],
+        "properties": {
+          "time": { "type": "string" },
+          "phase": { "type": "string" },
+          "visual": { "type": "string" },
+          "voiceover": { "type": "string" }
+        }
+      }
+    },
+    "omitted_slots": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

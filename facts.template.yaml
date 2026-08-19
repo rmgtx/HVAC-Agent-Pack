@@ -1,0 +1,54 @@
+# Copy this file to facts.yaml and fill it. The agent writes copy only from
+# facts.yaml. Empty optional fields are omitted from copy — never invented.
+#
+# Required: non-empty or the run stops.
+# Optional: null, false, or "" means do not mention it.
+
+legal_name: ""          # NAP — must match website, GBP, and LSA
+phone: ""               # E.164 or local display form; use the same string everywhere
+city: ""                # Primary city for H1s and headlines
+license: ""             # State contractor / HVAC license number as printed
+
+service_area: []        # Cities or ZIPs you actually serve, e.g. ["Madison", "Middleton"]
+systems_sold: []        # Subset of: ac_replacement, furnace_replacement, heat_pump_installation
+
+address:
+  street: ""
+  locality: ""          # Same as city unless they differ
+  region: ""            # State code, e.g. WI
+  postal_code: ""
+  country: "US"
+
+# Optional — omit from copy if null / false / empty
+offers_free_estimate: false
+family_owned: false
+years_in_business: null
+
+financing:
+  apr_percent: null           # e.g. 0 — only if actually offered
+  term_months: null           # e.g. 60
+  down_payment: null          # e.g. 0
+  monthly_example: null       # e.g. 89 — requires monthly_example_caveat
+  monthly_example_caveat: ""  # e.g. "for qualifying credit on a 3-ton 16 SEER system"
+
+rebate:
+  cap_usd: null               # e.g. 2000
+  source: ""                  # Utility or OEM program name
+
+proof:
+  review_count: null          # Integer only if current
+  review_source: ""           # e.g. Google
+  rating: null                # e.g. 4.9 — only with review_count and review_source
+
+warranty:
+  parts_years: null
+  parts_source: ""            # manufacturer | installer
+  labor_years: null
+  labor_source: ""            # installer | manufacturer
+
+install_sla: ""               # e.g. "next-day" — only if you can keep it in peak season
+brands: []                    # Brands you are authorized to install
+
+programs:
+  google_guaranteed: false
+  bbb_rating: ""              # e.g. A+ — empty unless verified
