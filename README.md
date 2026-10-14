@@ -4,6 +4,32 @@ Agent-ready copy system for **HVAC system replacement** (not repair): Google Ads
 
 Copy is generated only from verified facts in `facts.yaml`. Empty optional fields are omitted — the agent does not invent `$89/mo`, review counts, or warranties.
 
+## Why this exists
+
+Ask a general-purpose model for HVAC ads and it invents the details that sell:
+financing, star ratings, install speed, warranties. Those claims can be false, and
+false advertising is a liability for the contractor. This pack makes the agent write
+only from `facts.yaml`. Every claim maps to a filled field, and an empty field is
+skipped or replaced with a safe substitute from [`claims.md`](claims.md), never guessed.
+
+### Example (fictional business)
+
+`facts.yaml`: Example Heating & Air · Madison, WI · license HVAC-0000 · systems: AC
+replacement · free estimates: yes · financing, reviews, rebates, warranty: empty
+
+| Unguarded model output | With this pack | Why |
+|---|---|---|
+| `$89/Month Financing` | — | `financing` is empty |
+| `500+ 5-Star Reviews` | `Lic. HVAC-0000 · Madison` | No `proof.review_count`; license number and city substitute |
+| `Next-Day Install` | `Schedule Your Estimate` | No `install_sla` |
+| `Save $1,200 Today` | `Ask About Utility Programs` | No `rebate.cap_usd` |
+| `AC Replacement Madison` | `AC Replacement Madison` | `systems_sold` + `city` |
+| — | `Free Replacement Estimate` | `offers_free_estimate: true` |
+
+The unguarded strings aren't made up for this example. They're the failures
+`claims.md` lists from a real briefing. Each output records the optional fields it
+skipped in `omitted_slots`, so a reviewer can see what was left out and why.
+
 ## Setup
 
 1. Copy [`facts.template.yaml`](facts.template.yaml) over [`facts.yaml`](facts.yaml) (or edit `facts.yaml` in place).
